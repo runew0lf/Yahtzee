@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="frameShape">
-    <enum>QFrame::Panel</enum>
+    <enum>QFrame::NoFrame</enum>
    </property>
    <property name="frameShadow">
     <enum>QFrame::Sunken</enum>
@@ -42,7 +42,7 @@
     </rect>
    </property>
    <property name="frameShape">
-    <enum>QFrame::Panel</enum>
+    <enum>QFrame::NoFrame</enum>
    </property>
    <property name="frameShadow">
     <enum>QFrame::Sunken</enum>
@@ -61,7 +61,7 @@
     </rect>
    </property>
    <property name="frameShape">
-    <enum>QFrame::Panel</enum>
+    <enum>QFrame::NoFrame</enum>
    </property>
    <property name="frameShadow">
     <enum>QFrame::Sunken</enum>
@@ -80,7 +80,7 @@
     </rect>
    </property>
    <property name="frameShape">
-    <enum>QFrame::Panel</enum>
+    <enum>QFrame::NoFrame</enum>
    </property>
    <property name="frameShadow">
     <enum>QFrame::Sunken</enum>
@@ -99,7 +99,7 @@
     </rect>
    </property>
    <property name="frameShape">
-    <enum>QFrame::Panel</enum>
+    <enum>QFrame::NoFrame</enum>
    </property>
    <property name="frameShadow">
     <enum>QFrame::Sunken</enum>
