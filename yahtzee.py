@@ -10,8 +10,11 @@ class mywindow(QtWidgets.QMainWindow):
         super(mywindow, self).__init__()
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
-        self.dice = [1, 2, 3, 4, 5]   
-        self.hold_list = [self.ui.chk1, self.ui.chk2, self.ui.chk3, self.ui.chk4, self.ui.chk5]
+        self.dice = [1, 2, 3, 4, 5]
+        self.hold_list = [self.ui.chk1, self.ui.chk2,
+                          self.ui.chk3, self.ui.chk4, self.ui.chk5]
+        self.lower_list = [self.ui.txtAces, self.ui.txtTwos, self.ui.txtThrees,
+                           self.ui.txtFours, self.ui.txtFives, self.ui.txtSixes]
 
         # Add Click Even for Buttons
         self.ui.btnRoll.clicked.connect(self.on_btnRoll)
@@ -22,7 +25,7 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.btnFives.clicked.connect(self.on_btnFives)
         self.ui.btnSixes.clicked.connect(self.on_btnSixes)
 
-        # Inital Roll of dice
+        # Initial Roll of dice
         self.RollDice()
 
     def RollDice(self):
@@ -30,7 +33,7 @@ class mywindow(QtWidgets.QMainWindow):
             if not self.hold_list[i].isChecked():
                 self.dice[i] = randint(1, 6)
         self.showDice()
-            
+
     def showDice(self):
         self.ui.lblD1.setPixmap(QtGui.QPixmap(f"D{self.dice[0]}.png"))
         self.ui.lblD2.setPixmap(QtGui.QPixmap(f"D{self.dice[1]}.png"))
@@ -44,33 +47,45 @@ class mywindow(QtWidgets.QMainWindow):
 
     @pyqtSlot()
     def on_btnAces(self):
-        if self.ui.txtAces.text() is "":
-            self.ui.txtAces.setText(f"{self.dice.count(1)}")
+        self.set_upper_labels(1)
 
     @pyqtSlot()
     def on_btnTwos(self):
-        if self.ui.txtTwos.text() is "":
-            self.ui.txtTwos.setText(f"{self.dice.count(2)}")
+        self.set_upper_labels(2)
 
     @pyqtSlot()
     def on_btnThrees(self):
-        if self.ui.txtThrees.text() is "":
-            self.ui.txtThrees.setText(f"{self.dice.count(3)}")
+        self.set_upper_labels(3)
 
     @pyqtSlot()
     def on_btnFours(self):
-        if self.ui.txtFours.text() is "":        
-            self.ui.txtFours.setText(f"{self.dice.count(4)}")
+        self.set_upper_labels(4)
 
     @pyqtSlot()
     def on_btnFives(self):
-        if self.ui.txtFives.text() is "":        
-            self.ui.txtFives.setText(f"{self.dice.count(5)}")
+        self.set_upper_labels(5)
 
     @pyqtSlot()
     def on_btnSixes(self):
-        if self.ui.txtSixes.text() is "":        
-            self.ui.txtSixes.setText(f"{self.dice.count(6)}")
+        self.set_upper_labels(6)
+
+    def set_upper_labels(self, label):
+        if self.lower_list[label - 1].text() is "":
+            score = self.dice.count(label) * label
+            self.lower_list[label - 1].setText(f"{score}")
+            self.calc_upper_totals(score)
+            self.clear_checks()
+
+    def calc_upper_totals(self, value):
+        total = self.ui.txtTotalScore.text()
+        if total is "":
+            self.ui.txtTotalScore.setText(f"{value}")
+        else:
+            self.ui.txtTotalScore.setText(f"{int(total) + int(value)}")
+
+    def clear_checks(self):
+        for hold in self.hold_list:
+            hold.setChecked(False)
 
 
 app = QtWidgets.QApplication([])
